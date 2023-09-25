@@ -9,6 +9,7 @@ import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.container.ContainerRequestContext;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.UriInfo;
@@ -20,11 +21,7 @@ public class Child2Resource {
     @Inject
     Child3Resource child3Resource;
     @Inject
-    Id1Bean id1Bean;
-    private Id2Bean id2Bean;
-
-    @Inject
-    HttpServerRequest request;
+    ContainerRequestContext containerRequestContext;
 
 
 
@@ -33,25 +30,19 @@ public class Child2Resource {
         System.out.println(Thread.currentThread().getName() + ": init Child2Resource");
     }
 
-    @jakarta.enterprise.inject.Produces
-    Id2Bean idBean(){
-        id2Bean = new Id2Bean(request.getParam("id2"));
-        return id2Bean;
-    }
-
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public Uni<String> hello() {
         System.out.println(Thread.currentThread().getName() + ": Child2Resource hello method");
         return Uni.createFrom().item(() -> "Child2Resource Hello from RESTEasy Reactive: " +
-                "\nid1=" + id1Bean +
-                "\nid2=" + id2Bean);
+                "\nid1=" + containerRequestContext.getProperty("id1") +
+                "\nid2=" + containerRequestContext.getProperty("id2"));
     }
 
     @Path("/{id3}")
     public Uni<Child3Resource> childResource(@PathParam("id3") String id3) {
         System.out.println(Thread.currentThread().getName() + ": returning child3Resource");
-        request.params().set("id3", id3);
+        containerRequestContext.setProperty("id3", new Id1Bean(id3));
         return Uni.createFrom().item(() -> child3Resource);
     }
 }
