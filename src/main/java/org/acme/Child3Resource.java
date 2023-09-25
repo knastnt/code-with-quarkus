@@ -28,7 +28,7 @@ public class Child3Resource {
 
     @PostConstruct
     void init(){
-        System.out.println("init Child3Resource");
+        System.out.println(Thread.currentThread().getName() + ": init Child3Resource");
     }
 
     @jakarta.enterprise.inject.Produces
@@ -40,7 +40,7 @@ public class Child3Resource {
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public String hello() {
-        System.out.println("Child3Resource hello method");
+        System.out.println(Thread.currentThread().getName() + ": Child3Resource hello method");
         return "Child3Resource Hello from RESTEasy Reactive: " +
                 "\nid1=" + id1Bean +
                 "\nid2=" + id2Bean +

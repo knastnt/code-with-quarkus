@@ -19,7 +19,7 @@ public class TestMainVerticle {
     vertx.deployVerticle(new AbstractVerticle() {
       @Override
       public void start(Promise<Void> startPromise) throws Exception {
-        System.out.println("Started verticle");
+        System.out.println(Thread.currentThread().getName() + ": Started verticle");
         startPromise.complete();
       }
     }, testContext.succeeding(id -> testContext.completeNow()));

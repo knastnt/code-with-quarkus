@@ -29,7 +29,7 @@ public class Child2Resource {
 
     @PostConstruct
     void init(){
-        System.out.println("init Child2Resource");
+        System.out.println(Thread.currentThread().getName() + ": init Child2Resource");
     }
 
     @jakarta.enterprise.inject.Produces
@@ -41,13 +41,15 @@ public class Child2Resource {
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public String hello() {
-        System.out.println("Child2Resource hello method");
-        return "Child2Resource Hello from RESTEasy Reactive: id2=" + id2Bean;
+        System.out.println(Thread.currentThread().getName() + ": Child2Resource hello method");
+        return "Child2Resource Hello from RESTEasy Reactive: " +
+                "\nid1=" + id1Bean +
+                "\nid2=" + id2Bean;
     }
 
     @Path("/{id3}")
     public Child3Resource childResource(@PathParam("id3") String id3) {
-        System.out.println("returning child3Resource");
+        System.out.println(Thread.currentThread().getName() + ": returning child3Resource");
         request.params().set("id3", id3);
         return child3Resource;
     }

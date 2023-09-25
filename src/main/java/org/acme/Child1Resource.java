@@ -27,10 +27,10 @@ public class Child1Resource {
 
     @PostConstruct
     void init(){
-        System.out.println("init Child1Resource");
+        System.out.println(Thread.currentThread().getName() + ": init Child1Resource");
     }
 
-    @jakarta.enterprise.inject.Produces
+    @jakarta.enterprise.inject.Produces //Будет создан в requestScope контексте и заинджекчен в дочерние ресурсы
     Id1Bean idBean(){
         //Бин создаётся только тогда, когда его нужно куда-то заинджектить, поэтому внутри этого класса переменную
         // id1Bean использовать нельзя - она может быть не проинициализирована и равна null
@@ -41,13 +41,14 @@ public class Child1Resource {
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public String hello() {
-        System.out.println("Child1Resource hello method");
-        return "Child1Resource Hello from RESTEasy Reactive: id1=" + id1Bean;
+        System.out.println(Thread.currentThread().getName() + ": Child1Resource hello method");
+        return "Child1Resource Hello from RESTEasy Reactive: " +
+                "\nid1=" + id1Bean; //наглядно показано что нельзя использовать в том же классе, т.к. он может быть не проинициализирован
     }
 
     @Path("/{id2}")
     public Child2Resource childResource(@PathParam("id2") String id2) {
-        System.out.println("returning child2Resource");
+        System.out.println(Thread.currentThread().getName() + ": returning child2Resource");
         request.params().set("id2", id2);
         return child2Resource;
     }

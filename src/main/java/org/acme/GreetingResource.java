@@ -32,19 +32,19 @@ public class GreetingResource {
 
     @PostConstruct
     void init(){
-        System.out.println("init GreetingResource");
+        System.out.println(Thread.currentThread().getName() + " init GreetingResource");
     }
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public String hello() {
-        System.out.println("greeting hello method");
+        System.out.println(Thread.currentThread().getName() + ": greeting hello method");
         return "Hello from RESTEasy Reactive";
     }
 
     @Path("/{id1}")
     public Child1Resource childResource(@PathParam("id1") String id1) {
-        System.out.println("returning child1Resource");
+        System.out.println(Thread.currentThread().getName() + ": returning child1Resource");
         request.params().set("id1", id1);
         return child1Resource;
     }
