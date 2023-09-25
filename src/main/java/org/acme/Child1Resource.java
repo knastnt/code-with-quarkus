@@ -3,6 +3,7 @@ package org.acme;
 import io.smallrye.mutiny.Uni;
 import io.vertx.core.http.HttpServerRequest;
 import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.inject.spi.CDI;
 import jakarta.inject.Inject;
@@ -17,7 +18,7 @@ import jakarta.ws.rs.core.UriInfo;
 
 import java.util.List;
 
-@RequestScoped
+@ApplicationScoped
 public class Child1Resource {
     @Inject
     Child2Resource child2Resource;
