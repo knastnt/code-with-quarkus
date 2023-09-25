@@ -1,5 +1,6 @@
 package org.acme;
 
+import io.smallrye.mutiny.Uni;
 import io.vertx.core.http.HttpServerRequest;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -37,9 +38,9 @@ public class GreetingResource {
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)
-    public String hello() {
+    public Uni<String> hello() {
         System.out.println(Thread.currentThread().getName() + ": greeting hello method");
-        return "Hello from RESTEasy Reactive";
+        return Uni.createFrom().item(() -> "Hello from RESTEasy Reactive");
     }
 
     @Path("/{id1}")

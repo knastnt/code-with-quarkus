@@ -1,5 +1,6 @@
 package org.acme;
 
+import io.smallrye.mutiny.Uni;
 import io.vertx.core.http.HttpServerRequest;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.RequestScoped;
@@ -40,10 +41,10 @@ public class Child1Resource {
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)
-    public String hello() {
+    public Uni<String> hello() {
         System.out.println(Thread.currentThread().getName() + ": Child1Resource hello method");
-        return "Child1Resource Hello from RESTEasy Reactive: " +
-                "\nid1=" + id1Bean; //наглядно показано что нельзя использовать в том же классе, т.к. он может быть не проинициализирован
+        return Uni.createFrom().item(() -> "Child1Resource Hello from RESTEasy Reactive: " +
+                "\nid1=" + id1Bean); //наглядно показано что нельзя использовать в том же классе, т.к. он может быть не проинициализирован
     }
 
     @Path("/{id2}")

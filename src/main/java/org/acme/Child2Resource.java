@@ -1,5 +1,6 @@
 package org.acme;
 
+import io.smallrye.mutiny.Uni;
 import io.vertx.core.http.HttpServerRequest;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.RequestScoped;
@@ -40,17 +41,17 @@ public class Child2Resource {
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)
-    public String hello() {
+    public Uni<String> hello() {
         System.out.println(Thread.currentThread().getName() + ": Child2Resource hello method");
-        return "Child2Resource Hello from RESTEasy Reactive: " +
+        return Uni.createFrom().item(() -> "Child2Resource Hello from RESTEasy Reactive: " +
                 "\nid1=" + id1Bean +
-                "\nid2=" + id2Bean;
+                "\nid2=" + id2Bean);
     }
 
     @Path("/{id3}")
-    public Child3Resource childResource(@PathParam("id3") String id3) {
+    public Uni<Child3Resource> childResource(@PathParam("id3") String id3) {
         System.out.println(Thread.currentThread().getName() + ": returning child3Resource");
         request.params().set("id3", id3);
-        return child3Resource;
+        return Uni.createFrom().item(() -> child3Resource);
     }
 }
