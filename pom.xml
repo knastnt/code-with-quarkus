@@ -12,10 +12,9 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
-    <quarkus.platform.version>3.2.3.Final</quarkus.platform.version>
+    <quarkus.platform.version>2.13.8.Final</quarkus.platform.version>
     <skipITs>true</skipITs>
     <surefire-plugin.version>3.0.0</surefire-plugin.version>
-    <querydsl.version>5.0.0</querydsl.version>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -52,30 +51,7 @@
       <artifactId>vertx-junit5</artifactId>
       <scope>test</scope>
     </dependency>
-    <!-- https://mvnrepository.com/artifact/org.keycloak/keycloak-model-jpa -->
-    <dependency>
-      <groupId>org.keycloak</groupId>
-      <artifactId>keycloak-model-jpa</artifactId>
-      <version>22.0.1</version>
-    </dependency>
 
-    <dependency>
-      <groupId>com.querydsl</groupId>
-      <artifactId>querydsl-core</artifactId>
-      <version>${querydsl.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.querydsl</groupId>
-      <artifactId>querydsl-jpa</artifactId>
-      <version>${querydsl.version}</version>
-      <classifier>jakarta</classifier>
-    </dependency>
-    <dependency>
-      <groupId>com.querydsl</groupId>
-      <artifactId>querydsl-apt</artifactId>
-      <version>${querydsl.version}</version>
-      <classifier>jakarta</classifier>
-    </dependency>
 
   </dependencies>
   <build>
