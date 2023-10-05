@@ -52,30 +52,21 @@
       <artifactId>vertx-junit5</artifactId>
       <scope>test</scope>
     </dependency>
-    <!-- https://mvnrepository.com/artifact/org.keycloak/keycloak-model-jpa -->
+
+    <!-- https://mvnrepository.com/artifact/org.apache.activemq/activemq-broker -->
     <dependency>
-      <groupId>org.keycloak</groupId>
-      <artifactId>keycloak-model-jpa</artifactId>
-      <version>22.0.1</version>
+      <groupId>org.apache.activemq</groupId>
+      <artifactId>activemq-broker</artifactId>
+      <version>5.18.2</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.apache.activemq/activemq-amqp -->
+    <dependency>
+      <groupId>org.apache.activemq</groupId>
+      <artifactId>activemq-amqp</artifactId>
+      <version>5.18.2</version>
     </dependency>
 
-    <dependency>
-      <groupId>com.querydsl</groupId>
-      <artifactId>querydsl-core</artifactId>
-      <version>${querydsl.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.querydsl</groupId>
-      <artifactId>querydsl-jpa</artifactId>
-      <version>${querydsl.version}</version>
-      <classifier>jakarta</classifier>
-    </dependency>
-    <dependency>
-      <groupId>com.querydsl</groupId>
-      <artifactId>querydsl-apt</artifactId>
-      <version>${querydsl.version}</version>
-      <classifier>jakarta</classifier>
-    </dependency>
+
 
   </dependencies>
   <build>
