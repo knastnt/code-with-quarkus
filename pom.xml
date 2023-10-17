@@ -16,7 +16,6 @@
     <skipITs>true</skipITs>
     <surefire-plugin.version>3.0.0</surefire-plugin.version>
     <querydsl.version>5.0.0</querydsl.version>
-    <artemis.version>2.17.0</artemis.version>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -26,21 +25,6 @@
         <version>${quarkus.platform.version}</version>
         <type>pom</type>
         <scope>import</scope>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.activemq</groupId>
-        <artifactId>artemis-jakarta-client</artifactId>
-        <version>${artemis.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.activemq</groupId>
-        <artifactId>artemis-amqp-protocol</artifactId>
-        <version>${artemis.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.activemq</groupId>
-        <artifactId>artemis-stomp-protocol</artifactId>
-        <version>${artemis.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -73,15 +57,6 @@
       <groupId>io.quarkiverse.artemis</groupId>
       <artifactId>quarkus-artemis-jms</artifactId>
       <version>3.1.2</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.apache.activemq</groupId>
-      <artifactId>artemis-amqp-protocol</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.activemq</groupId>
-      <artifactId>artemis-stomp-protocol</artifactId>
     </dependency>
 
 
