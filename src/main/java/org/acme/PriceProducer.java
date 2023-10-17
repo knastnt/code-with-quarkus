@@ -3,6 +3,7 @@ import java.util.Random;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.event.Observes;
@@ -18,6 +19,7 @@ import io.quarkus.runtime.StartupEvent;
  */
 @ApplicationScoped
 public class PriceProducer implements Runnable {
+    Logger LOG = Logger.getLogger(PriceProducer.class.getName());
 
     @Inject
     ConnectionFactory connectionFactory;
@@ -36,7 +38,9 @@ public class PriceProducer implements Runnable {
     @Override
     public void run() {
         try (JMSContext context = connectionFactory.createContext(JMSContext.AUTO_ACKNOWLEDGE)) {
-            context.createProducer().send(context.createQueue("prices"), Integer.toString(random.nextInt(100)));
+            String lastPrice = Integer.toString(random.nextInt(100));
+            context.createProducer().send(context.createQueue("prices"), lastPrice);
+            LOG.info("Sent last price: " + lastPrice);
         }
     }
 }

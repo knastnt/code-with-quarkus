@@ -16,6 +16,7 @@
     <skipITs>true</skipITs>
     <surefire-plugin.version>3.0.0</surefire-plugin.version>
     <querydsl.version>5.0.0</querydsl.version>
+    <artemis.version>2.17.0</artemis.version>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -26,11 +27,21 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
-<!--      <dependency>-->
-<!--        <groupId>org.apache.activemq</groupId>-->
-<!--        <artifactId>artemis-jakarta-client</artifactId>-->
-<!--        <version>2.17.0</version>-->
-<!--      </dependency>-->
+      <dependency>
+        <groupId>org.apache.activemq</groupId>
+        <artifactId>artemis-jakarta-client</artifactId>
+        <version>${artemis.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.activemq</groupId>
+        <artifactId>artemis-amqp-protocol</artifactId>
+        <version>${artemis.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.activemq</groupId>
+        <artifactId>artemis-stomp-protocol</artifactId>
+        <version>${artemis.version}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
   <dependencies>
@@ -58,24 +69,19 @@
       <scope>test</scope>
     </dependency>
 
-    <!-- https://mvnrepository.com/artifact/io.quarkiverse.artemis/quarkus-artemis-core -->
     <dependency>
       <groupId>io.quarkiverse.artemis</groupId>
       <artifactId>quarkus-artemis-jms</artifactId>
-      <version>3.0.1</version>
+      <version>3.1.2</version>
     </dependency>
 
-    <!-- https://mvnrepository.com/artifact/org.apache.activemq/artemis-amqp-protocol -->
     <dependency>
       <groupId>org.apache.activemq</groupId>
       <artifactId>artemis-amqp-protocol</artifactId>
-      <version>2.11.0</version>
     </dependency>
-    <!-- https://mvnrepository.com/artifact/org.apache.activemq/artemis-stomp-protocol -->
     <dependency>
       <groupId>org.apache.activemq</groupId>
       <artifactId>artemis-stomp-protocol</artifactId>
-      <version>2.11.0</version>
     </dependency>
 
 

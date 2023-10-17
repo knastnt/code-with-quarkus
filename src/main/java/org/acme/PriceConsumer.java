@@ -2,6 +2,7 @@ package org.acme;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.logging.Logger;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.event.Observes;
@@ -20,7 +21,7 @@ import io.quarkus.runtime.StartupEvent;
  */
 @ApplicationScoped
 public class PriceConsumer implements Runnable {
-
+    Logger LOG = Logger.getLogger(PriceConsumer.class.getName());
     @Inject
     ConnectionFactory connectionFactory;
 
@@ -48,6 +49,7 @@ public class PriceConsumer implements Runnable {
                 Message message = consumer.receive();
                 if (message == null) return;
                 lastPrice = message.getBody(String.class);
+                LOG.info("Getted last price: " + lastPrice);
             }
         } catch (JMSException e) {
             throw new RuntimeException(e);
